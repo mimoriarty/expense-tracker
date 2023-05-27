@@ -1,0 +1,31 @@
+.summary-container {
+  text-align: center;
+}
+
+.summary-header {
+  background: #111;
+  color: #fff;
+}
+
+.summary-header h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.summary-price {
+  font-size: 6em;
+  margin: 0.2em 0 0;
+  font-weight: 100;
+}
+
+.summary-price span {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.2em;
+  padding-bottom: 2em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  *color: #fff;
+}

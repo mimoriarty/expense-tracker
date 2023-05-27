@@ -1,23 +1,61 @@
-import logo from './logo.svg';
+import { createContext, useEffect, useState } from 'react';
+import Header from './Layout/Header';
+import New from './Components/New';
+import List from './Components/List';
+import Summary from './Components/Summary';
+import { getExpenses } from './services/expenses';
+import { expensesReducer } from './reducers/expensesReducer';
+
 import './App.css';
 
+export const expensesContext = createContext();
+const defaultFormValues = {
+  title: '',
+  description: '',
+  category: '',
+  date: '',
+  amount: '',
+};
+
 function App() {
+  const [expenses, setExpenses] = useState([]);
+  const [formValues, setFormValues] = useState(defaultFormValues);
+  const [reload, setReload] = useState(false);
+  const [summary, setSummary] = useState(0);
+  const handleFormChange = (e) => {
+    const { value, name } = e.target;
+    
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+  const toggleReload = () => {
+    setReload(!reload);
+    setFormValues(defaultFormValues);
+  };
+
+  useEffect(() => {
+    getExpenses().then(res => {
+      setExpenses(res);
+      setSummary(expensesReducer({ type: 'calculateSummary', payload: res }));
+    });
+  }, [reload]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Header /> */}
+      <expensesContext.Provider value={{
+        expenses,
+        setExpenses,
+        formValues,
+        handleFormChange,
+        toggleReload,
+      }}>
+        <New />
+        <List />
+        <Summary amount={summary} />
+      </expensesContext.Provider>
     </div>
   );
 }

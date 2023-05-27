@@ -1,0 +1,44 @@
+{
+  "expenses": [
+    {
+      "id": 1,
+      "title": "Chops",
+      "description": "Pork chops",
+      "amount": 12,
+      "date": "2018-01-01",
+      "category": "meat"
+    },
+    {
+      "id": 2,
+      "title": "Apples",
+      "description": "Red Royal Gala",
+      "amount": 5.2,
+      "date": "2018-01-01",
+      "category": "fruits"
+    },
+    {
+      "title": "Whiskey",
+      "description": "",
+      "category": "",
+      "date": "",
+      "amount": "11",
+      "id": 3
+    },
+    {
+      "title": "Ron",
+      "description": "",
+      "category": "",
+      "date": "",
+      "amount": "9.99",
+      "id": 4
+    },
+    {
+      "title": "pineapple",
+      "description": "",
+      "category": "",
+      "date": "",
+      "amount": "2.4",
+      "id": 5
+    }
+  ]
+}
