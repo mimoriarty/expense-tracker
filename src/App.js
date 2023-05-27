@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './Layout/Header';
-import New from './Components/New';
-import List from './Components/List';
-import Summary from './Components/Summary';
+import NewRoute from './routes/NewRoute';
+import ListRoute from './routes/ListRoute';
+import SummaryRoute from './routes/SummaryRoute';
 import { getExpenses } from './services/expenses';
 import { expensesReducer } from './reducers/expensesReducer';
 
@@ -21,6 +22,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
   const [formValues, setFormValues] = useState(defaultFormValues);
   const [reload, setReload] = useState(false);
+  const [newModalVisible, setNewModalVisible] = useState(false);
   const [summary, setSummary] = useState(0);
   const handleFormChange = (e) => {
     const { value, name } = e.target;
@@ -34,6 +36,9 @@ function App() {
     setReload(!reload);
     setFormValues(defaultFormValues);
   };
+  const toggleNewModalVisibility = () => {
+    setNewModalVisible(!newModalVisible);
+  }
 
   useEffect(() => {
     getExpenses().then(res => {
@@ -42,19 +47,25 @@ function App() {
     });
   }, [reload]);
 
+
   return (
     <div className="App">
-      {/* <Header /> */}
       <expensesContext.Provider value={{
         expenses,
-        setExpenses,
+        summary,
+        newModalVisible,
         formValues,
+        setExpenses,
         handleFormChange,
         toggleReload,
+        toggleNewModalVisibility,
       }}>
-        <New />
-        <List />
-        <Summary amount={summary} />
+        <Header />
+        <Routes>
+          <Route path='/new' element={<NewRoute />} index={true}></Route>
+          <Route path='/list' element={<ListRoute />}></Route>
+          <Route path='/summary' element={<SummaryRoute />}></Route>
+        </Routes>
       </expensesContext.Provider>
     </div>
   );

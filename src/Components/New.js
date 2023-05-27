@@ -14,16 +14,15 @@ export default function New() {
     <div className="margin--vh">
       <form className="pure-form pure-form-stacked">
         <fieldset>
-          <legend className="pure-menu-heading">A new expense</legend>
           <div className="margin--b-med">
             <label forhtml="title">Title</label>
             <input type="text" name="title" value={formValues.title} onChange={(e) => handleFormChange(e)} />
             {/* <span className="pure-form-message">This is a required field.</span> */}
           </div>
-          {/* <div className="margin--b-med">
+          <div className="margin--b-med">
             <label forhtml="description">Description</label>
             <input type="text" name="description" />
-          </div> */}
+          </div>
           <div className="margin--b-med">
             <label forhtml="amount">Amount</label>
             <input
@@ -34,15 +33,20 @@ export default function New() {
               onChange={(e) => handleFormChange(e)}
             />
           </div>
-          {/* <div className="margin--b-med">
+          <div className="margin--b-med">
             <label forhtml="date">Date</label>
-            <input type="datetime" name="date" />
+            <input type="datetime-local" name="date" />
           </div>
           <div className="margin--b-med">
             <label forhtml="category">Category</label>
             <input type="text" name="category" />
-          </div> */}
-          <button className="pure-button pure-button-primary" onClick={handleSubmit}>Add</button>
+          </div>
+          <button
+            className="pure-button pure-button-primary"
+            onClick={handleSubmit}
+          >
+            Add
+          </button>
         </fieldset>
       </form>
     </div>

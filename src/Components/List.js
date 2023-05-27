@@ -1,13 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { unit } from "../constants";
 import Modal from "./Modal";
 
-import { expensesContext } from "../App";
-
-export default function List() {
+export default function List({ title, list }) {
   const [modalVisible, setModalVisible] = useState(false);
   const handleModalToggle = () => setModalVisible(!modalVisible);
-  const { expenses } = useContext(expensesContext);
 
   return(
     <div>
@@ -16,9 +13,9 @@ export default function List() {
         toggleFn={handleModalToggle}
       /> */}
       <div className="list margin--vh">
-        <legend className="pure-menu-heading">Expenses list</legend>
+        <legend className="pure-menu-heading">{title}</legend>
         <ul>
-          {expenses.map(expense => <li
+          {list.map(expense => <li
             key={expense.id}
             className="pure-g expense-item"
           >
