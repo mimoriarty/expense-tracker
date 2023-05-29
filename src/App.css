@@ -2,17 +2,6 @@ body {
   color: #323232;
 }
 
-.expense-item {
-  border-bottom: 1px solid #e5e5e5;
-  cursor: pointer;
-  padding: 0 1em;
-}
-
-.expense-item:hover {
-  background-color: #e5e5e5;
-  font-weight: bold;
-}
-
 h1 {
   font-size: medium;
 }
@@ -25,6 +14,20 @@ h1 {
   text-align: right;
 }
 
+.list .expense-item {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0 1em;
+}
+
+.list.editable .expense-item {
+  cursor: pointer;
+}
+
+.list.editable .expense-item:hover {
+  background-color: #e5e5e5;
+  font-weight: bold;
+}
+
 .margin--vh {
   margin: 1em;
 }
@@ -35,6 +38,21 @@ h1 {
 
 .margin--t-lng {
   margin-top: 2em;
+}
+
+.pure-form .button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.pure-form .button-group .pure-button {
+  min-width: 116px;
+}
+
+
+.pure-form .remove-data {
+  background-color: tomato;
 }
 
 ul {

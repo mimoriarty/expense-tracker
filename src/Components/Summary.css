@@ -7,6 +7,14 @@
   color: #fff;
 }
 
+.summary-header.bad {
+  background: tomato;
+}
+
+.summary-header.good {
+  background: #029226;
+}
+
 .summary-header h2 {
   margin: 0;
   padding-top: 2em;

@@ -22,8 +22,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
   const [formValues, setFormValues] = useState(defaultFormValues);
   const [reload, setReload] = useState(false);
-  const [newModalVisible, setNewModalVisible] = useState(false);
-  const [summary, setSummary] = useState(0);
+  const [summary, setSummary] = useState({});
   const handleFormChange = (e) => {
     const { value, name } = e.target;
     
@@ -36,14 +35,14 @@ function App() {
     setReload(!reload);
     setFormValues(defaultFormValues);
   };
-  const toggleNewModalVisibility = () => {
-    setNewModalVisible(!newModalVisible);
-  }
 
   useEffect(() => {
     getExpenses().then(res => {
       setExpenses(res);
-      setSummary(expensesReducer({ type: 'calculateSummary', payload: res }));
+      setSummary({
+        overAll: expensesReducer({ type: 'calculateOverallSummary', payload: res }),
+        monthly: expensesReducer({ type: 'calculateMonthSummary', payload: res }),
+      });
     });
   }, [reload]);
 
@@ -53,12 +52,11 @@ function App() {
       <expensesContext.Provider value={{
         expenses,
         summary,
-        newModalVisible,
         formValues,
-        setExpenses,
         handleFormChange,
+        setExpenses,
+        setFormValues,
         toggleReload,
-        toggleNewModalVisibility,
       }}>
         <Header />
         <Routes>

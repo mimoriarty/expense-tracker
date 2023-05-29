@@ -1,13 +1,27 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Modal from '../Components/Modal';
-import New from '../Components/New';
+import Form from '../Components/Form';
 import List from '../Components/List';
 
 import { expensesContext } from '../App';
 import { expensesReducer } from '../reducers/expensesReducer';
 
 export default function NewRoute() {
-  const { expenses, newModalVisible, toggleNewModalVisibility } = useContext(expensesContext);
+  const { formValues, expenses, toggleReload } = useContext(expensesContext);
+  const [newModalVisible, setNewModalVisible] = useState(false);
+
+  const toggleNewModalVisibility = () => {
+    setNewModalVisible(!newModalVisible);
+  };
+  const onHandleSubmit = (e) => {
+    e.preventDefault();
+    expensesReducer({
+      type: 'addExpense',
+      payload: formValues
+    });
+    toggleNewModalVisibility();
+    toggleReload();
+  };
 
   return(
     <>
@@ -15,8 +29,8 @@ export default function NewRoute() {
         title='Add Expense'
         isVisible={newModalVisible}
         toggleFn={toggleNewModalVisibility}
-      >
-        <New />
+        >
+        <Form handleSubmit={onHandleSubmit} />
       </Modal>
       <div className="adder margin--t-lng">
         <p><span className="adder-icon" onClick={toggleNewModalVisibility}>+</span></p>

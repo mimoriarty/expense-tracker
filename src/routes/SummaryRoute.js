@@ -7,6 +7,15 @@ export default function SummaryRoute() {
   const { summary } = useContext(expensesContext);
 
   return(
-    <Summary amount={summary}/>
+    <ul className='list'>
+      <li>
+        <legend className="pure-menu-heading">Monthly expenses</legend>
+        <Summary amount={summary.monthly}/>
+      </li>
+      <li>
+        <legend className="pure-menu-heading">OverAll expenses</legend>
+        <Summary amount={summary.overAll}/>
+      </li>
+    </ul>
   );
 }
